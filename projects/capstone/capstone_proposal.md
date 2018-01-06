@@ -8,10 +8,10 @@ January 3rd, 2018
 
 ### Domain Background
 
-In an attempt to explore a problem most closely resembling the work we do at Capital One, I propose to work on a problem related to credit approval using the data from Lending Club.  This is a well known challenge pertaining to the marketplace which matches borrowers seeking loans to investors offering funds. As a typical credit risk problem, I am primarily interested in identifying characteristics that can help identify  factors leading to loan defaults. We try to predict such behavior using varios attributes describing credit worthiness of a borrower. These characteristics include (but are not limited to) prior lending history of the boorower. Based on the eligibility of a borrower, the loans are either approved or declined. If approved, the loans may have variable interest rates based on the risk profiling. I find the challenge of predicting human behavior quite interesting and because this deals with the type of data we usually handle at Capital One, I thought this may be a fruitful exercise to undertake for the capstone project.
+In an attempt to explore a problem most closely resembling the work we do at Capital One, I propose to work on a problem related to credit approval using the data from Lending Club.  This is a well known challenge pertaining to the marketplace which matches borrowers seeking loans to investors offering funds. As a typical credit risk problem, I am primarily interested in identifying characteristics that can help identify  factors leading to loan defaults. We try to predict such behavior using various attributes describing credit worthiness of a borrower. These characteristics include (but are not limited to) prior lending history of the boorower. Based on the eligibility of a borrower, the loans are either approved or declined. If approved, the loans may have variable interest rates based on the risk profiling. I find the challenge of predicting human behavior quite interesting and because this deals with the type of data we usually handle at Capital One, I thought this may be a fruitful exercise to undertake for the capstone project.
 
 
-Details of how it works can be found [here] (https://www.lendingclub.com/public/how-peer-lending-works.action). We will build a model and calculate the dollar amount of money saved by rejecting these loan requests with the model, and then combine this with the profits lost in rejecting good loans to determine the net amount saved. We will use Lending Club’s Open Data to obtain the probability of a loan request defaulting or being charged off.
+Details of how Lending Club works can be found [here] (https://www.lendingclub.com/public/how-peer-lending-works.action). We will build a model and calculate the dollar amount of money saved by rejecting these loan requests with the model, and then I plan to explore if we can combine this with the profits lost in rejecting good loans. We will use Lending Club’s Open Data to obtain the probability of a loan request defaulting or being charged off.
 
 * References: 
 
@@ -20,7 +20,6 @@ Details of how it works can be found [here] (https://www.lendingclub.com/public/
 
 
 ### Problem Statement
-_(approx. 1 paragraph)_
 
 The primary motivation for this exercise is to identify how much money could have been saved if we have a model that can identify the loan defaults appropriately. Similarly, we can also cross check how close our model resemebles that of Lending Club because we are also provided with the data for _Decline Loans_. 
 
@@ -57,7 +56,6 @@ As Lending Club offers the data for the loans it rejects, I am hoping to use thi
 
 
 ### Evaluation Metrics
-_(approx. 1-2 paragraphs)_
 
 The applicable solution to the problem will be a classification model which most accurately identify the loans which have the highest potential to default. To measure the effectiveness of 
 the model, we will take into consider F1 score:
@@ -70,7 +68,7 @@ where:
 
 <img src="https://latex.codecogs.com/svg.latex?\Large&space;recall=\frac{True Positive}{True Positive+True Negative}" title="\Large recall" />
 
-As previously discussed, credit risk problems tend to have imbalanced targets which requires us to look at both how well we identify the imbalanced classes. A typical meausre like _Accuracy_ can be misleading in such scenario. Hence, I decided to use F1 ratio for the purpose of this exercise.
+As previously discussed, credit risk problems tend to have imbalanced targets which requires us to look at how well we identify the imbalanced classes. A typical meausre like _Accuracy_ can be misleading in such scenario. Hence, I decided to use F1 ratio for the purpose of this exercise.
 The main goal is to identify as many defaulted loans accuratly as possible while not being overly restrictive to classify good loans as the ones which will default. Latter is important as it can lead to rejecting loans which can contribute towards the profit of the company.
 Our solution should minimize risk and not avoid risk by being overly strict around the decision criteria. To convey this point, it's important to keep in mind that easiest way to not have any risk in our portfolio is by not offering any loans. However, our intention is to offer loans while assessing the risk associated with the loans apporpriately.
 
