@@ -38,6 +38,8 @@ The datasets required to conduct the analysis are available at [Lending Club](ht
 
 We will take these dataset into consideration by breaking them into training set, validation set for hyper-parameter tuning and both a test set as well as out of time test set to see the effectiveness of our model over long term.
 
+* __Software__ : I will be making use of open source language R which has been leading statistical computing for over 20 years with over 10,000 libraries.
+
 
 ### Solution Statement 
 
