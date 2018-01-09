@@ -8,12 +8,18 @@ January 3rd, 2018
 
 ### Domain Background
 
-In an attempt to explore a problem most closely resembling the work we do at Capital One, I propose to work on a problem related to credit approval using the data from Lending Club.  This is a well known challenge pertaining to the marketplace which matches borrowers seeking loans to investors offering funds. As a typical credit risk problem, I am primarily interested in identifying characteristics that can help identify  factors leading to loan defaults. We try to predict such behavior using various attributes describing credit worthiness of a borrower. These characteristics include (but are not limited to) prior lending history of the boorower. Based on the eligibility of a borrower, the loans are either approved or declined. If approved, the loans may have variable interest rates based on the risk profiling. I find the challenge of predicting human behavior quite interesting and because this deals with the type of data we usually handle at Capital One, I thought this may be a fruitful exercise to undertake for the capstone project.
+In an attempt to explore a problem most closely resembling the work we do at Capital One, I propose to work on a problem related to credit approval using the data from Lending Club.  This is a well known challenge<a href="#1" id="noteref"><sup>1</sup></a> pertaining to the marketplace which matches borrowers seeking loans to investors offering funds. As a typical credit risk problem, I am primarily interested in identifying characteristics that can help identify  factors leading to loan defaults. We try to predict such behavior using various attributes describing credit worthiness of a borrower. These characteristics include (but are not limited to) prior lending history of the boorower. Based on the eligibility of a borrower, the loans are either approved or declined. If approved, the loans may have variable interest rates based on the risk profiling. I find the challenge of predicting human behavior quite interesting and because this deals with the type of data we usually handle at Capital One, I thought this may be a fruitful exercise to undertake for the capstone project.
 
 
-Details of how Lending Club works can be found [here] (https://www.lendingclub.com/public/how-peer-lending-works.action). We will build a model and calculate the dollar amount of money saved by rejecting these loan requests with the model, and then I plan to explore if we can combine this with the profits lost in rejecting good loans. We will use Lending Club’s Open Data to obtain the probability of a loan request defaulting or being charged off.
 
-* References: 
+Details of how Lending Club works can be found [here] (https://www.lendingclub.com/public/how-peer-lending-works.action). 
+
+We will build a model and calculate the dollar amount of money saved by rejecting these loan requests with the model, and then I plan to explore if we can combine this with the profits lost in rejecting good loans. We will use Lending Club’s Open Data to obtain the probability of a loan request defaulting or being charged off.
+
+
+* References:
+	 
+	<a id = "noteref" href="#1"><sup>1</a> [Determinants of Default in P2P Lending](http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0139427)</a>
 
 	[HBS Summary of Lending Club](http://www.hbs.edu/openforum/openforum.hbs.org/goto/challenge/understand-digital-transformation-of-business/lending-club-using-data-to-redefine-the-credit-score-and-improve-access-to-consumer-credit.html)
 
@@ -22,6 +28,9 @@ Details of how Lending Club works can be found [here] (https://www.lendingclub.c
 ### Problem Statement
 
 The primary motivation for this exercise is to identify how much money could have been saved if we have a model that can identify the loan defaults appropriately. Similarly, we can also cross check how close our model resemebles that of Lending Club because we are also provided with the data for _Decline Loans_. 
+
+It is a supervised classifiation problem where we are trying detect if the borrower defaults on repaying the loan given the historical data provided to us. 
+We will make use of close to 200,000 data examples which will use to train and peform in-time sampling and out of time sampling.
 
 For the purpose of this exercise, we will focus on two questions:
 
@@ -34,9 +43,12 @@ For the purpose of this exercise, we will focus on two questions:
 The datasets required to conduct the analysis are available at [Lending Club](https://www.lendingclub.com/info/download-data.action) where the data has been broken down by both Accepted and Rejected as well as origination year/quarter of the loan originations. 
 
 * __Time Period__ : The loan level data is available starting from 2007 until 2017 broken by years and quarters. 
-* __Attributes__ : As a quick overview, it appears that there are more than 100 attributes available including credit history for the borrower, funding amount, origination dates and interest rate.
-
-We will take these dataset into consideration by breaking them into training set, validation set for hyper-parameter tuning and both a test set as well as out of time test set to see the effectiveness of our model over long term.
+* __Attributes__ : As a quick overview, it appears that there are close to 145 attributes available including credit history for the borrower, funding amount, origination dates and interest rate.
+* __Number of Borrowers__ : We will make use of the loan files which consists of 200,000 borrowers
+	* We will take these dataset into consideration by breaking them into training set, validation set for hyper-parameter tuning and both a test set as well as out of time test set to see the effectiveness of our model over long term. The distribution of train, validation and test set will be kept at 85%, 15% and 15% respectively.
+	* To ensure that our models are robust over time, we will also make use of out of time sample, this is the data that will not be used to train the model.
+	* We will exclude any attributes that are not available at the time of loan approval.
+	* There are several ways to handle class imbalance, specifically oversampling of the minority class, undersampling of majority class but these approaches can affect bias. Hence, we will first try not to perform such operations and if model performance needs to be improved, one of these techniques will be applied to improve model performance.
 
 * __Software__ : I will be making use of open source language R which has been leading statistical computing for over 20 years with over 10,000 libraries.
 
@@ -56,6 +68,7 @@ However, to measure our model's effectiveness, we will conduct out of time testi
 As we have the actual data for all the defaulted loans, we can take this data into consideration to compare how our model performs.
 As Lending Club offers the data for the loans it rejects, I am hoping to use this dataset as part of the benchmark exercise. While we will not have the properietary model of the company, we will use the output of the model (i.e. Declined loans) to conduct a benchmarking exercise. If our model is as good as that of Lending Club, majority of the loans in the declined dataset should also be declined by our model. 
 
+As part of Benchmark model, I will first fit a logistic regression. The final solution will then compare random forest, gradient boosting and deep learning techniques to this benchmark model based on their respective Area under the ROC.
 
 ### Evaluation Metrics
 
